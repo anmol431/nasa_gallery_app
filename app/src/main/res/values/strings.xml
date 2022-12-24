@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Nasa Gallery App</string>
+
+    <string name="exit_text">Press again to exit</string>
+    <string name="back_text">Back</string>
+    <string name="no_network_text">No Internet Connection</string>
+
+
+</resources>
