@@ -5,10 +5,6 @@
     <data>
 
         <variable
-            name="listener"
-            type="com.nasa.db.app.view.adapter.NasaDetailsAdapter.OnItemClickListener" />
-
-        <variable
             name="nasaDTO"
             type="com.nasa.db.app.model.NasaDTO" />
 
@@ -17,78 +13,107 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_parent_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp">
+        android:layout_height="match_parent">
 
-        <Space
-            android:id="@+id/space"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_banner"
             android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:visibility="gone"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_root_view"
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/grey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/nsv_view"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="@{view -> listener.onImageClick(nasaDTO, ivBanner)}"
-            android:theme="@style/Theme.MaterialComponents.Light"
-            app:cardBackgroundColor="@color/colorPrimaryDark"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="3dp"
-            app:strokeColor="@color/grey_dark"
-            app:strokeWidth="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:fillViewport="true"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/space">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_main_container"
+                android:id="@+id/cl_root_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_banner"
-                    android:layout_width="0dp"
-                    android:layout_height="250dp"
-                    android:scaleType="fitXY"
-                    android:transitionName="zoom_expand"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ProgressBar
-                    android:id="@+id/progress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:indeterminate="true"
-                    android:indeterminateTint="@color/grey"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/tv_movie_title"/>
+                android:layout_height="match_parent"
+                android:layout_marginBottom="45dp"
+                android:padding="24dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_movie_title"
+                    android:id="@+id/tv_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@{nasaDTO.title}"
                     android:textColor="@color/white"
-                    android:textSize="13sp"
-                    android:maxLines="2"
-                    android:lines="2"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/iv_banner"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_banner" />
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{nasaDTO.convertServerDateToUi(nasaDTO.date)}"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_copyright"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="24dp"
+                    android:text="@{nasaDTO.copyright == null ? `` : `© ` + nasaDTO.copyright}"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_date"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_explanation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{nasaDTO.explanation}"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:maxLines="2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_date" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_expand_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/show_more_text"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_explanation" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

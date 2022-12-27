@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +15,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.nasa.db.app.R;
 import com.nasa.db.app.databinding.AdapterNasaDetailsBinding;
 import com.nasa.db.app.model.NasaDTO;
 
@@ -24,10 +24,8 @@ import java.util.List;
 
 public class NasaDetailsAdapter extends RecyclerView.Adapter<NasaDetailsAdapter.ViewHolder> {
     ArrayList<NasaDTO> nasaDTOS;
-    OnItemClickListener listener;
 
-    public NasaDetailsAdapter(OnItemClickListener clickListener) {
-        this.listener = clickListener;
+    public NasaDetailsAdapter() {
         nasaDTOS = new ArrayList<>();
     }
 
@@ -59,28 +57,31 @@ public class NasaDetailsAdapter extends RecyclerView.Adapter<NasaDetailsAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.binding.setNasaDTO(nasaDTOS.get(position));
-        holder.binding.setListener(listener);
 
-        if (position % 2 == 0) {
-            holder.binding.space.setVisibility(View.GONE);
-        } else {
-            holder.binding.space.setVisibility(View.INVISIBLE);
-        }
+        holder.binding.tvExpandView.setOnClickListener(v -> {
+            if (holder.binding.tvExpandView.getText().toString().equals(holder.itemView.getContext().getString(R.string.show_more_text))) {
+                holder.binding.tvExpandView.setText(holder.itemView.getContext().getString(R.string.show_less_text));
+                holder.binding.tvExplanation.setMaxLines(Integer.MAX_VALUE);
+            } else {
+                holder.binding.tvExpandView.setText(holder.itemView.getContext().getString(R.string.show_more_text));
+                holder.binding.tvExplanation.setMaxLines(2);
+            }
+        });
 
         Glide.with(holder.itemView.getContext()).load(nasaDTOS.get(position).getUrl())
                 .listener(new RequestListener<Drawable>() {
-            @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                holder.binding.progress.setVisibility(View.GONE);
-                return false;
-            }
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        holder.binding.progress.setVisibility(View.GONE);
+                        return false;
+                    }
 
-            @Override
-            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                holder.binding.progress.setVisibility(View.GONE);
-                return false;
-            }
-        }).into(holder.binding.ivBanner);
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        holder.binding.progress.setVisibility(View.GONE);
+                        return false;
+                    }
+                }).into(holder.binding.ivBanner);
 
         holder.binding.executePendingBindings();
     }
@@ -88,10 +89,6 @@ public class NasaDetailsAdapter extends RecyclerView.Adapter<NasaDetailsAdapter.
     @Override
     public int getItemCount() {
         return nasaDTOS.size();
-    }
-
-    public interface OnItemClickListener {
-        void onImageClick(NasaDTO nasaDTO, ImageView imageView);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

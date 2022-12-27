@@ -14,18 +14,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.nasa.db.app.R;
 import com.nasa.db.app.databinding.ActivityMainBinding;
-import com.nasa.db.app.model.NasaDTO;
-import com.nasa.db.app.view.adapter.NasaDetailsAdapter;
+import com.nasa.db.app.view.adapter.NasaGalleryListAdapter;
 import com.nasa.db.app.view_model.NasaDetailsViewModel;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements NasaDetailsAdapter.OnItemClickListener {
-    private static final String NASA_DATA = "nasa_details";
+public class MainActivity extends AppCompatActivity implements NasaGalleryListAdapter.OnItemClickListener {
+    private static final String POSITION = "position";
     boolean doubleBackToExit = false;
     private ActivityMainBinding binding;
     private NasaDetailsViewModel viewModel;
-    private NasaDetailsAdapter adapter;
+    private NasaGalleryListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +58,14 @@ public class MainActivity extends AppCompatActivity implements NasaDetailsAdapte
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         binding.rcvMovies.setLayoutManager(layoutManager);
 
-        adapter = new NasaDetailsAdapter(this);
+        adapter = new NasaGalleryListAdapter(this);
         binding.rcvMovies.setAdapter(adapter);
     }
 
     @Override
-    public void onImageClick(NasaDTO nasaDTO, ImageView imageView) {
+    public void onImageClick(int position, ImageView imageView) {
         Intent intent = new Intent(getApplicationContext(), DetailsActivity.class);
-        intent.putExtra(NASA_DATA, nasaDTO);
+        intent.putExtra(POSITION, position);
         try {
             ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this,
                     imageView, Objects.requireNonNull(ViewCompat.getTransitionName(imageView)));

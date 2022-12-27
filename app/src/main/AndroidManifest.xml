@@ -27,6 +27,7 @@
 
         <activity android:name="com.nasa.db.app.view.DetailsActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/Custom_Theme.Fullscreen"
             tools:ignore="LockedOrientationActivity"/>
     </application>
 
