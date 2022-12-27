@@ -28,22 +28,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/srl_movies"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_movies"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/v_title_separator">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcv_movies"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            app:layout_constraintTop_toBottomOf="@id/v_title_separator"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

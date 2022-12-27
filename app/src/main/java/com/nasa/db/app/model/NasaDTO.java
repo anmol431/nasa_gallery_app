@@ -1,7 +1,5 @@
 package com.nasa.db.app.model;
 
-import static com.nasa.db.app.constants.Constants.IMAGE_URL;
-
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -13,250 +11,37 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 public class NasaDTO implements Serializable {
-    @SerializedName("id")
-    private int id;
+    @SerializedName("copyright")
+    private String copyright;
 
-    @SerializedName("adult")
-    private boolean adult;
+    @SerializedName("date")
+    private String date;
 
-    @SerializedName("category")
-    private String category;
+    @SerializedName("explanation")
+    private String explanation;
 
-    @SerializedName("backdrop_path")
-    private String backdrop_path;
+    @SerializedName("hdurl")
+    private String hdurl;
 
-    @SerializedName("original_language")
-    private String original_language;
+    @SerializedName("media_type")
+    private String media_type;
 
-    @SerializedName("original_title")
-    private String original_title;
-
-    @SerializedName("overview")
-    private String overview;
-
-    @SerializedName("popularity")
-    private double popularity;
-
-    @SerializedName("poster_path")
-    private String poster_path;
-
-    @SerializedName("release_date")
-    private String release_date;
+    @SerializedName("service_version")
+    private String service_version;
 
     @SerializedName("title")
     private String title;
 
-    @SerializedName("video")
-    private boolean video;
-
-    @SerializedName("vote_average")
-    private float vote_average;
-
-    @SerializedName("vote_count")
-    private int vote_count;
-
-    @SerializedName("genre_ids")
-    private ArrayList<Integer> genre_ids;
-
-    @SerializedName("budget")
-    private long budget;
-
-    @SerializedName("status")
-    private String status;
-
-    @SerializedName("revenue")
-    private long revenue;
-
-    @SerializedName("m_genres")
-    private String m_genres;
+    @SerializedName("url")
+    private String url;
 
     @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
-        String url = IMAGE_URL + imageUrl;
-        Glide.with(view.getContext()).load(url).into(view);
-    }
-
-    public String getM_genres() {
-        return m_genres;
-    }
-
-    public void setM_genres(String m_genres) {
-        this.m_genres = m_genres;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public boolean isAdult() {
-        return adult;
-    }
-
-    public void setAdult(boolean adult) {
-        this.adult = adult;
-    }
-
-    public String getBackdrop_path() {
-        return backdrop_path;
-    }
-
-    public void setBackdrop_path(String backdrop_path) {
-        this.backdrop_path = backdrop_path;
-    }
-
-    public String getOriginal_language() {
-        return original_language;
-    }
-
-    public void setOriginal_language(String original_language) {
-        this.original_language = original_language;
-    }
-
-    public String getOriginal_title() {
-        return original_title;
-    }
-
-    public void setOriginal_title(String original_title) {
-        this.original_title = original_title;
-    }
-
-    public String getOverview() {
-        return overview;
-    }
-
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
-    public double getPopularity() {
-        return popularity;
-    }
-
-    public void setPopularity(double popularity) {
-        this.popularity = popularity;
-    }
-
-    public String getPoster_path() {
-        return poster_path;
-    }
-
-    public void setPoster_path(String poster_path) {
-        this.poster_path = poster_path;
-    }
-
-    public String getRelease_date() {
-        return release_date;
-    }
-
-    public void setRelease_date(String release_date) {
-        this.release_date = release_date;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public boolean isVideo() {
-        return video;
-    }
-
-    public void setVideo(boolean video) {
-        this.video = video;
-    }
-
-    public float getVote_average() {
-        return vote_average;
-    }
-
-    public void setVote_average(float vote_average) {
-        this.vote_average = vote_average;
-    }
-
-    public int getVote_count() {
-        return vote_count;
-    }
-
-    public void setVote_count(int vote_count) {
-        this.vote_count = vote_count;
-    }
-
-    public ArrayList<Integer> getGenre_ids() {
-        return genre_ids;
-    }
-
-    public void setGenre_ids(ArrayList<Integer> genre_ids) {
-        this.genre_ids = genre_ids;
-    }
-
-    public long getBudget() {
-        return budget;
-    }
-
-    public void setBudget(long budget) {
-        this.budget = budget;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public long getRevenue() {
-        return revenue;
-    }
-
-    public void setRevenue(long revenue) {
-        this.revenue = revenue;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "NasaDTO{" +
-                "id=" + id +
-                ", adult=" + adult +
-                ", backdrop_path='" + backdrop_path + '\'' +
-                ", original_language='" + original_language + '\'' +
-                ", original_title='" + original_title + '\'' +
-                ", overview='" + overview + '\'' +
-                ", popularity=" + popularity +
-                ", poster_path='" + poster_path + '\'' +
-                ", release_date='" + release_date + '\'' +
-                ", title='" + title + '\'' +
-                ", video=" + video +
-                ", vote_average=" + vote_average +
-                ", vote_count=" + vote_count +
-                ", category=" + category +
-                ", genre_ids=" + genre_ids +
-                ", budget=" + budget +
-                ", status=" + status +
-                ", revenue=" + revenue +
-                ", m_genres=" + m_genres +
-                '}';
+        Glide.with(view.getContext()).load(imageUrl).into(view);
     }
 
     public String convertServerDateToUi(String requestedDate) {
@@ -279,4 +64,82 @@ public class NasaDTO implements Serializable {
         return requestedDate;
     }
 
+    public String getCopyright() {
+        return copyright;
+    }
+
+    public void setCopyright(String copyright) {
+        this.copyright = copyright;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
+
+    public String getHdurl() {
+        return hdurl;
+    }
+
+    public void setHdurl(String hdurl) {
+        this.hdurl = hdurl;
+    }
+
+    public String getMedia_type() {
+        return media_type;
+    }
+
+    public void setMedia_type(String media_type) {
+        this.media_type = media_type;
+    }
+
+    public String getService_version() {
+        return service_version;
+    }
+
+    public void setService_version(String service_version) {
+        this.service_version = service_version;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "NasaDTO{" +
+                "copyright=" + copyright +
+                ", date=" + date +
+                ", explanation='" + explanation + '\'' +
+                ", hdurl='" + hdurl + '\'' +
+                ", media_type='" + media_type + '\'' +
+                ", service_version='" + service_version + '\'' +
+                ", title='" + title + '\'' +
+                ", url=" + url +
+                '}';
+    }
 }

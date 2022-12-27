@@ -33,11 +33,13 @@
             android:id="@+id/cv_root_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="@{view -> listener.onMovieClick(nasaDTO, ivMoviePoster)}"
+            android:onClick="@{view -> listener.onImageClick(nasaDTO, ivBanner)}"
             android:theme="@style/Theme.MaterialComponents.Light"
-            app:cardBackgroundColor="@color/white"
+            app:cardBackgroundColor="@color/colorPrimaryDark"
             app:cardCornerRadius="24dp"
             app:cardElevation="3dp"
+            app:strokeColor="@color/grey_dark"
+            app:strokeWidth="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/space">
@@ -48,75 +50,41 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_movie_poster"
+                    android:id="@+id/iv_banner"
                     android:layout_width="0dp"
-                    android:layout_height="200dp"
+                    android:layout_height="250dp"
                     android:scaleType="fitXY"
                     android:transitionName="zoom_expand"
-                    app:imageUrl="@{nasaDTO.poster_path}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_progress_view"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="15dp"
-                    android:theme="@style/Theme.MaterialComponents.Light"
-                    app:cardBackgroundColor="@color/colorPrimaryDark"
-                    app:cardCornerRadius="30dp"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_movie_poster"
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/grey"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_movie_poster">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_progress_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_votes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </com.google.android.material.card.MaterialCardView>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tv_movie_title"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_movie_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:text="@{nasaDTO.title}"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
                     android:maxLines="2"
                     android:lines="2"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="10dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/cv_progress_view"
-                    app:layout_constraintTop_toBottomOf="@id/cv_progress_view" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_release_date"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:text="@{nasaDTO.convertServerDateToUi(nasaDTO.release_date)}"
-                    android:textColor="@color/grey_dark"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/tv_movie_title"
-                    app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
+                    app:layout_constraintStart_toStartOf="@id/iv_banner"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_banner" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

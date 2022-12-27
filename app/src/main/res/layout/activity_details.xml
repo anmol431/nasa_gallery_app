@@ -51,7 +51,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                imageUrl="@{nasaDTO.poster_path}"/>
+                app:imageUrl="@{nasaDTO.url}"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_movie_title"
@@ -125,7 +125,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@{nasaDTO.overview}"
+                android:text="@{nasaDTO.explanation}"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@id/cv_progress_view"
@@ -161,7 +161,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@{nasaDTO.status}"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@id/tv_status_label"
