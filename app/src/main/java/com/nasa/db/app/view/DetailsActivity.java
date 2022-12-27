@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager2.widget.CompositePageTransformer;
 
 import com.nasa.db.app.databinding.ActivityDetailsBinding;
 import com.nasa.db.app.view.adapter.NasaDetailsAdapter;
