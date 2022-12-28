@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.nasa.db.app.databinding.ActivityDetailsBinding;
+import com.nasa.db.app.util.ZoomOutPageTransformer;
 import com.nasa.db.app.view.adapter.NasaDetailsAdapter;
 import com.nasa.db.app.view_model.NasaDetailsViewModel;
 
@@ -58,5 +59,6 @@ public class DetailsActivity extends AppCompatActivity {
     private void setUpAdapter() {
         adapter = new NasaDetailsAdapter();
         binding.vpNasa.setAdapter(adapter);
+        binding.vpNasa.setPageTransformer(new ZoomOutPageTransformer());
     }
 }
