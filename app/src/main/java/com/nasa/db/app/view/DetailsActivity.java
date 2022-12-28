@@ -33,11 +33,11 @@ public class DetailsActivity extends AppCompatActivity {
 
         setUpAdapter();
         setUpListener();
-        getMovieList();
+        getNasaData();
         setObserver();
     }
 
-    private void getMovieList() {
+    private void getNasaData() {
         adapter.clearList();
         viewModel.getNasaGalleryData();
     }

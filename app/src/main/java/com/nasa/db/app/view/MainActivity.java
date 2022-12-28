@@ -36,11 +36,11 @@ public class MainActivity extends AppCompatActivity implements NasaGalleryListAd
         viewModel = new ViewModelProvider(this).get(NasaDetailsViewModel.class);
 
         setUpAdapter();
-        getMovieList();
+        getNasaData();
         setObserver();
     }
 
-    private void getMovieList() {
+    private void getNasaData() {
         adapter.clearList();
         viewModel.getNasaGalleryData();
     }
@@ -56,10 +56,10 @@ public class MainActivity extends AppCompatActivity implements NasaGalleryListAd
 
     private void setUpAdapter() {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        binding.rcvMovies.setLayoutManager(layoutManager);
+        binding.rcvImageList.setLayoutManager(layoutManager);
 
         adapter = new NasaGalleryListAdapter(this);
-        binding.rcvMovies.setAdapter(adapter);
+        binding.rcvImageList.setAdapter(adapter);
     }
 
     @Override

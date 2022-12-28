@@ -15,19 +15,19 @@ import java.util.ArrayList;
 public class NasaDetailsViewModel extends AndroidViewModel {
 
     private final NasaRepository nasaRepository;
-    private LiveData<ArrayList<NasaDTO>> popularMoviesResponseDto;
+    private LiveData<ArrayList<NasaDTO>> nasaData;
 
     public NasaDetailsViewModel(@NonNull Application application) {
         super(application);
         nasaRepository = new NasaRepository(application);
-        popularMoviesResponseDto = new MutableLiveData<>();
+        nasaData = new MutableLiveData<>();
     }
 
     public void getNasaGalleryData() {
-        popularMoviesResponseDto = nasaRepository.getNasaGallery();
+        nasaData = nasaRepository.getNasaGallery();
     }
 
     public LiveData<ArrayList<NasaDTO>> getNasaData() {
-        return popularMoviesResponseDto;
+        return nasaData;
     }
 }
